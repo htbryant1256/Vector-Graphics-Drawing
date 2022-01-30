@@ -11,5 +11,3 @@ Draws vector line art depending on the initial starting point set by the user, t
 
 ![Vector art 2](https://user-images.githubusercontent.com/60831223/151713245-25370f59-7417-4b9c-9ef3-0fb825c000d4.png)
 
-
-![image](https://user-images.githubusercontent.com/60831223/151713435-5e0134bb-390c-4d6f-9733-9f1ea559592f.png)
