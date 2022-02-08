@@ -12,6 +12,7 @@ Psudo game engine class
 #include "Enemy.h"
 #include "Player.h"
 #include "Map.h"
+#include "Line.h"
 #include <iostream>
 
 class Game
@@ -26,6 +27,7 @@ private:
 	Enemy enemy;
 	Player player;
 	Map map;
+	Line line;
 
 	//Private Variables
 	int windowHeight;
@@ -49,14 +51,7 @@ public:
 	void update();
 	void render();
 
-	int x, y;
-	sf::Font font;
-	sf::Text text;
-	sf::Text text2;
-	sf::RectangleShape displayRect;
-	sf::RectangleShape line1;
-	sf::RectangleShape cursor;
-	sf::RectangleShape line3;
+
 
 };
 
