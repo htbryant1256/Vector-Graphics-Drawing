@@ -9,9 +9,6 @@ Psudo game engine class
 #include "SFML/Window.hpp"
 #include "SFML/System.hpp"
 #include "SFML/Network.hpp"
-#include "Enemy.h"
-#include "Player.h"
-#include "Map.h"
 #include "Line.h"
 #include <iostream>
 
@@ -24,9 +21,6 @@ private:
 	sf::VideoMode videoMode;
 
 	//Objects from headers
-	Enemy enemy;
-	Player player;
-	Map map;
 	Line line;
 
 	//Private Variables
@@ -50,9 +44,6 @@ public:
 	void pollEvents();
 	void update();
 	void render();
-
-
-
 };
 
 #endif
