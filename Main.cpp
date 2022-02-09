@@ -1,6 +1,6 @@
 /**
 Main.cpp
-C++ Game
+Vector Graphics 
 
 Author: Henry Bryant
 
@@ -16,9 +16,9 @@ COMPLETED BUGS:
 
 int main()
 {
-    //init Game Engine
+    //init game engine
     Game game;
-    //game Loop
+    //game loop
     while (game.running())
     {
         //update 
@@ -26,6 +26,6 @@ int main()
         //render
         game.render();
     }
-    //end of Application
+    //end of application
     return 0;
 }

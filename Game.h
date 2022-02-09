@@ -15,32 +15,30 @@ Psudo game engine class
 class Game
 {
 private:
-	//Objects
+	//objects
 	sf::RenderWindow* window;
 	sf::Event ev;
 	sf::VideoMode videoMode;
 
-	//Objects from headers
+	//objects from headers
 	Line line;
 
-	//Private Variables
+	//private Variables
 	int windowHeight;
 	int windowWidth;
-	sf::View view1;
 
-	//Private functions
+	//private functions
 	void initVariables();
 	void initWindow();
 
 public:
-	//Constructors and destructors
+	//constructors and destructors
 	Game();
 	virtual	~Game();
 
-	//Accessors
+	//accessors
 	const bool running() const;
-	int angle;
-	//Functions
+	//functions
 	void pollEvents();
 	void update();
 	void render();

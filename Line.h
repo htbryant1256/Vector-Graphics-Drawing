@@ -15,12 +15,11 @@ public:
 	sf::Text text;
 	sf::RectangleShape displayRect;
 	sf::RectangleShape vectorLine;
-	
 	sf::RectangleShape cursor;
-	
-	void initLine();
 	void updateLine();
+
 private:
+	void initLine();
 	int xVel, yVel, angle;
 	bool autoMode;
 };

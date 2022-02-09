@@ -2,76 +2,73 @@
 #include "line.h"
 #include <iostream>
 
-//Private Functions---------------------------------------------------------------------------------
+//private Functions---------------------------------------------------------------------------------
 void Game::initVariables()
 {
-	this->window = nullptr;
-    this->windowWidth = 1000;
-    this->windowHeight = 1000;
+	window = nullptr;
+    windowWidth = 1000;
+    windowHeight = 1000;
 }
 
 void Game::initWindow()
 {
-    this->videoMode.width = windowWidth;
-	this->videoMode.height = windowHeight;
-	this->window = new sf::RenderWindow(this->videoMode, "Vector Drawing", sf::Style::Titlebar | sf::Style::Close );
-    this->window->setFramerateLimit(60);
+    videoMode.width = windowWidth;
+	videoMode.height = windowHeight;
+	window = new sf::RenderWindow(videoMode, "Vector Drawing", sf::Style::Titlebar | sf::Style::Close );
+    window->setFramerateLimit(60);
 
-    this->view1.setCenter(sf::Vector2f(400.f, 300.f));
-    this->view1.setSize(sf::Vector2f(windowWidth, windowHeight));
-    this->window->setView(view1);
 }
 //event polling 
 void Game::pollEvents()
 {    
-    while (this->window->pollEvent(this->ev))
+    while (window->pollEvent(ev))
     {
-        switch (this->ev.type)
+        switch (ev.type)
         {
         case sf::Event::Closed:
-            this->window->close();
+            window->close();
             break;
         case sf::Event::KeyPressed:
-            if (this->ev.key.code == sf::Keyboard::Escape)
+            if (ev.key.code == sf::Keyboard::Escape)
             {
-                this->window->close();
+                window->close();
                 break;
             }
         }
     }
 }
 
-//Public Functions---------------------------------------------------------------------------------
+//public Functions---------------------------------------------------------------------------------
 //updates game logic
 void Game::update()
 {
-    this->pollEvents();
-    this->line.updateLine();
+    pollEvents();
+    line.updateLine();
 }
 
 //essentially display
 void Game::render()
 {
-    this->window->draw(line.cursor);
-    this->window->draw(line.vectorLine);
-    this->window->draw(line.displayRect);
-    this->window->draw(line.text);
-    this->window->display();
+    window->draw(line.cursor);
+    window->draw(line.vectorLine);
+    window->draw(line.displayRect);
+    window->draw(line.text);
+    window->display();
 }
 
-//Constructors / Destructors
+//constructors / destructors
 Game::Game()
 {
-	this->initVariables();
-	this->initWindow();
+	initVariables();
+	initWindow();
 }
 
 Game::~Game()
 {
-	delete this->window;
+	delete window;
 }
 
 const bool Game::running() const
 {
-	return this->window->isOpen();
+	return window->isOpen();
 }
