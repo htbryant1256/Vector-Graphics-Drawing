@@ -3,7 +3,7 @@
 
 IN DEVELOPMENT.
 
-Draws vector line art depending on the initial starting point set by the user, the user can also use WASD to change the movement.
+Draws vector line art depending on the initial starting point set by the user, the user can also use Q and E to toggle manual mode. WASD to change the movement.
 
 
 ![Vector art 1](https://user-images.githubusercontent.com/60831223/151713237-1e347b8b-4dd6-48a8-b6fc-55b9d52b2212.PNG)
