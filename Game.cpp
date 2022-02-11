@@ -14,7 +14,7 @@ void Game::initWindow()
 {
     videoMode.width = windowWidth;
 	videoMode.height = windowHeight;
-	window = new sf::RenderWindow(videoMode, "Vector Drawing", sf::Style::Titlebar | sf::Style::Close );
+    window = new sf::RenderWindow(videoMode, "Vector Drawing", sf::Style::Titlebar | sf::Style::Close);
     window->setFramerateLimit(60);
 
 }

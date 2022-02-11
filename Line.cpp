@@ -3,8 +3,8 @@
 
 void Line::initLine()
 {
-    xVel = 3;
-    yVel = 2;
+    xVel = 4;
+    yVel = -2;
     angle = 0;
     autoMode = true;
 
@@ -39,98 +39,91 @@ void Line::initLine()
     cursor.setOutlineThickness(1);
     
 }
+char Line::colliding()
+{
+ 
+    if (cursor.getPosition().x >= 0 && cursor.getPosition().x <= 1000 && cursor.getPosition().y >= 0 && cursor.getPosition().y <= 1000)
+    {
+        return '0';
+    }
+    else if (!cursor.getPosition().x >= 0 && cursor.getPosition().x <= 1000 && cursor.getPosition().y >= 0 && cursor.getPosition().y <= 1000)
+    {
+        return 'L';
+    }
+    else if (cursor.getPosition().x >= 0 && !cursor.getPosition().x <= 1000 && cursor.getPosition().y >= 0 && cursor.getPosition().y <= 1000)
+    {
+        return 'R';
+    }
+    else if (cursor.getPosition().x >= 0 && cursor.getPosition().x <= 1000 && !cursor.getPosition().y >= 0 && cursor.getPosition().y <= 1000)
+    {
+        return 'T';
+    }
+    else if (cursor.getPosition().x >= 0 && cursor.getPosition().x <= 1000 && cursor.getPosition().y >= 0 && !cursor.getPosition().y <= 1000)
+    {
+        return 'B';
+    }
+}
 //Public Functions---------------------------------------------------------------------------------
 
 void Line::updateLine()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+    if (autoMode)
     {
-        autoMode = false;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-    {
-        autoMode = true;
-    }
-
-    if (cursor.getPosition().x >= 0 && cursor.getPosition().x <= 1000 && cursor.getPosition().y >= 0 && cursor.getPosition().y <= 1000)
-    {
-        if (!autoMode)
+        switch (colliding())
         {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-            {
-                vectorLine.move(sf::Vector2f(2, 0));
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-            {
-                vectorLine.move(sf::Vector2f(-2, 0));
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-            {
-                vectorLine.move(sf::Vector2f(0, -2));
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-            {
-                vectorLine.move(sf::Vector2f(0, 2));
-            }
-        }
-    }
-    else if (autoMode && !cursor.getPosition().x >= 0 && cursor.getPosition().x <= 1000 && cursor.getPosition().y >= 0 && cursor.getPosition().y <= 1000)
-    {
-        yVel++;
-        xVel *= -1;
-        if (xVel <= 0)
-        {
-            xVel++;
-        }
-        vectorLine.setFillColor(sf::Color::Cyan);
-
-    }
-    else if (autoMode && cursor.getPosition().x >= 0 && !cursor.getPosition().x <= 1000 && cursor.getPosition().y >= 0 && cursor.getPosition().y <= 1000)
-    {
-
-        yVel--;
-        xVel *= -1;
-        if (xVel == 0)
-        {
-            xVel++;
-        }
-        vectorLine.setFillColor(sf::Color::Green);
-
-    }
-    else if (autoMode && cursor.getPosition().x >= 0 && cursor.getPosition().x <= 1000 && !cursor.getPosition().y >= 0 && cursor.getPosition().y <= 1000)
-    {
-        xVel--;
-        yVel *= -1;
-        if (yVel == 0)
-        {
+        case 'L':
             yVel++;
-        }
-        vectorLine.setFillColor(sf::Color::Yellow);
-    }
-    else if (autoMode && cursor.getPosition().x >= 0 && cursor.getPosition().x <= 1000 && cursor.getPosition().y >= 0 && !cursor.getPosition().y <= 1000)
-    {
-        yVel *= -1;
-        if (yVel == 0)
-        {
+            xVel *= -1;
+            if (xVel <= 0)
+            {
+                xVel++;
+            }
+            vectorLine.setFillColor(sf::Color::Cyan);
+            if (xVel <= -5)
+            {
+                xVel = -2;
+            }
+            break;
+        case 'R':
             yVel--;
+            xVel *= -1;
+            if (xVel == 0)
+            {
+                xVel++;
+            }
+            vectorLine.setFillColor(sf::Color::Green);
+            if (xVel >= 5)
+            {
+                xVel = 2;
+            }
+            break;
+        case 'T':
+            xVel--;
+            yVel *= -1;
+            if (yVel == 0)
+            {
+                yVel++;
+            }
+            vectorLine.setFillColor(sf::Color::Yellow);
+            if (yVel >= 5)
+            {
+                yVel = 2;
+            }
+            break;
+        case 'B':
+            yVel *= -1;
+            if (yVel == 0)
+            {
+                yVel--;
+            }
+            vectorLine.setFillColor(sf::Color::Magenta);
+            if (yVel <= -5)
+            {
+                yVel = -2;
+            }
+            break;
         }
-        vectorLine.setFillColor(sf::Color::Magenta);
-    }
-    if (xVel >= 5)
-    {
-        xVel = 2;
-    }
-    if (yVel >= 5)
-    {
-        yVel = 2;
-    }
-    if (yVel <= -5)
-    {
-        yVel = -2;
-    }
-    if (xVel <= -5)
-    {
-        xVel = -2;
+        vectorLine.move(sf::Vector2f(xVel, yVel));
     }
 
     text.setString("X Velocity: " + std::to_string(xVel) + 
@@ -138,10 +131,6 @@ void Line::updateLine()
                  "\nCoordinates: ( " + std::to_string(int(cursor.getPosition().x)) + 
                  " , " + std::to_string(int(cursor.getPosition().y)) + " )");
 
-    if (autoMode)
-    {
-        vectorLine.move(sf::Vector2f(xVel, yVel));
-    }
     cursor.setPosition(sf::Vector2f(vectorLine.getPosition().x - (cursor.getSize().x / 2), vectorLine.getPosition().y - (cursor.getSize().y / 2)));
     vectorLine.rotate(2);
 }

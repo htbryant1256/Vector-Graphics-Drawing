@@ -20,6 +20,7 @@ public:
 
 private:
 	void initLine();
+	char colliding();
 	int xVel, yVel, angle;
 	bool autoMode;
 };
